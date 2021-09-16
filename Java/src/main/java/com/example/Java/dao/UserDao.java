@@ -1,6 +1,5 @@
 package com.example.Java.dao;
 
-import com.example.Java.model.Questions;
 import com.example.Java.model.User;
 
 import java.util.List;

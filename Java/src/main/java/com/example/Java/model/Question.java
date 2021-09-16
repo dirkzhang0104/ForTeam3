@@ -2,10 +2,10 @@ package com.example.Java.model;
 
 import java.util.List;
 
-public class Questions {
+public class Question {
     private int questionId;
     private String question;
-    private List<String> answersList;
+    private List<Answer> answersList;
     private int correctAnswer;
 
     public int getQuestionId() {
@@ -24,11 +24,11 @@ public class Questions {
         this.question = question;
     }
 
-    public List<String> getAnswersList() {
+    public List<Answer> getAnswersList() {
         return answersList;
     }
 
-    public void setAnswersList(List<String> answersList) {
+    public void setAnswersList(List<Answer> answersList) {
         this.answersList = answersList;
     }
 
