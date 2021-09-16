@@ -5,11 +5,11 @@ import React from 'react';
 //   setInterval(() => receive([randPos(), randPos()]), 500)
 // }
 
-let knightPosition = [0, 0]
+let avatarPosition = [0, 0]
 let observer = null
 
 function emitChange() {
-  observer(knightPosition)
+  observer(avatarPosition)
 }
 
 export function observe(o) {
@@ -22,6 +22,6 @@ export function observe(o) {
 }
 
 export function moveAvatar(toX, toY) {
-  knightPosition = [toX, toY]
+  avatarPosition = [toX, toY]
   emitChange()
 }

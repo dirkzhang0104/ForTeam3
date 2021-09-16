@@ -15,7 +15,6 @@ function renderSquare(i, [avatarX, avatarY]) {
   return (
     <div onClick={() => handleSquareClick(x, y)} key={i} style={{ width: '25%', height: '10%' }} >
       <Square black={black}>{piece}</Square>
-
     </div>
   )
 }
