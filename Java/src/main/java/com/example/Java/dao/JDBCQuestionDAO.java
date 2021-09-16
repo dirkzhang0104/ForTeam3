@@ -23,8 +23,7 @@ public class JDBCQuestionDAO implements QuestionDAO {
     @Override
     public List<Question> getListOfQuestions() {
         List<Question> questions = new ArrayList<>();
-        String sql = "SELECT question_id, question, answer_id, answer, result FROM questions JOIN answers ON "
-            + "questions.question_id = answers.question_id";
+        String sql = "SELECT questions.question_id AS question_id, question FROM questions";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql);
         while (rows.next()) {
             Question question = mapQuestion(rows);
@@ -36,7 +35,7 @@ public class JDBCQuestionDAO implements QuestionDAO {
     @Override
     public List<Answer> getAnswersByQuestionId(int questionId) {
         List<Answer> answers = new ArrayList<>();
-        String sql = "SELECT question_id, question, answer_id, answer, result FROM questions JOIN answers ON "
+        String sql = "SELECT questions.question_id AS question_id, question, answer_id, answer, result FROM questions JOIN answers ON "
                 + "questions.question_id = answers.question_id WHERE questions.question_id = ?";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, questionId);
         while (rows.next()) {
@@ -50,7 +49,7 @@ public class JDBCQuestionDAO implements QuestionDAO {
     }
 
     private int getCorrectAnswerByQuestionId(int questionId) {
-        String sql = "SELECT question_id, question, answer_id, answer, result FROM questions JOIN answers ON "
+        String sql = "SELECT questions.question_id AS question_id, question, answer_id, answer, result FROM questions JOIN answers ON "
                 + "questions.question_id = answers.question_id WHERE questions.question_id = ? AND result = true";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, questionId);
         int correctAnswer = 0;

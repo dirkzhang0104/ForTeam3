@@ -2,11 +2,9 @@ package com.example.Java.dao;
 
 import com.example.Java.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.SqlInOutParameter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,8 @@ public class JDBCUserDAO implements UserDao {
     @Override
     public List<User> retrieveAllUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT user_id, user_name, score_id, score FROM users JOIN scores ON users.user_id = scores.user_id";
+        String sql = "SELECT users.user_id AS user_id, user_name, score_id, score " +
+                "FROM users LEFT JOIN scores ON users.user_id = scores.user_id";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql);
         while(rows.next()) {
             User user = mapUser(rows);
@@ -34,7 +33,8 @@ public class JDBCUserDAO implements UserDao {
 
     @Override
     public User getScoreByName(String name) {
-        String sql = "SELECT user_id, user_name, score_id, score FROM users JOIN scores ON users.user_id = scores.user_id WHERE user_name = ?";
+        String sql = "SELECT users.user_id, user_name, score_id, score FROM users JOIN scores ON " +
+                "users.user_id = scores.user_id WHERE user_name = ?";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, name);
         User user = null;
        if(rows.next()) {
@@ -45,9 +45,8 @@ public class JDBCUserDAO implements UserDao {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO user (user_name) VALUES (?)";
+        String sql = "INSERT INTO users (user_name) VALUES (?)";
         jdbcTemplate.update(sql, user.getUserName());
-
     }
 
     private User mapUser(SqlRowSet row) {
@@ -56,7 +55,6 @@ public class JDBCUserDAO implements UserDao {
         user.setUserName(row.getString("user_name"));
         user.setScoreId(row.getInt("score_id"));
         user.setScore(row.getInt("score"));
-
         return user;
     }
 }

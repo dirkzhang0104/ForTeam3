@@ -1,5 +1,6 @@
 begin transaction;
 rollback;
+
 DROP table if exists answers;
 DROP table if exists scores;
 DROP table if exists users;
@@ -25,7 +26,7 @@ CREATE table scores (
     score_id serial primary key,
     user_id int not null,
     score int,
-    constraint fk_scores_users foreign key (user_id) references users(user_id)
+    constraint fk_scores_users foreign key (user_id) references users (user_id)
 );
 
 INSERT INTO users (user_id, user_name) VALUES (DEFAULT, 'testUser');
