@@ -33,6 +33,9 @@ export default function Board({ avatarPosition }) {
   
   const [answerObj, setAnswerObj] = useState({})
 
+  // const questionsArray = ['1. What is the action of repeating code over and over again?', '2. What is a single instruction for a computer to perform a specific task?', '3. What is a symbol that works as a placeholder for data?', '', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10']
+  // const answersArray = ['a. Algorithm', 'b. Loop', 'c. Program', 'd. Sequence', 'a. Loop', 'b. Algorithm ', 'c. Command', 'd. Sequence', 'a. Loop', 'b. Sequence', 'c. Command', 'd. Variable']
+
   const squares = []
   for (let i = 0; i < 40; i++) {
     squares.push(renderSquare(i, avatarPosition))
@@ -67,9 +70,10 @@ export default function Board({ avatarPosition }) {
     if (x === 0) {
       return (
         
-        <div onClick={() => handleSquareClick(x, y)} key={i} style={{ width: '20%', height: '10%' }} >
+      <div onClick={() => handleSquareClick(x, y)} key={i} style={{ width: '20%', height: '10%' }} >
         <Square black={black}>{piece}
-          this is a question
+        These are questions
+          {/* {questionsArray.shift()} */}
         </Square>
       </div>
       )
@@ -77,7 +81,8 @@ export default function Board({ avatarPosition }) {
       return (
         <div onClick={() => handleSquareClick(x, y)} key={i} style={{ width: '20%', height: '10%' }} >
           <Square black={black}>{piece}
-          this is an answer
+          These are answers
+            {/* {answersArray.shift()} */}
           </Square>
         </div>
       )
@@ -101,4 +106,8 @@ export default function Board({ avatarPosition }) {
       {squares}
     </div>
   )
+}
+
+function getQuestions() {
+  
 }
